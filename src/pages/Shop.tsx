@@ -62,7 +62,7 @@ const Shop = () => {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 py-8 pt-20">
       <div className="flex items-center gap-3 mb-6">
         <ShoppingBag className="h-8 w-8 text-primary" />
         <h1 className="text-3xl font-bold">Shop</h1>
