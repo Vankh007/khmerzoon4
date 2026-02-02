@@ -11,6 +11,12 @@ import ViralTop10Card from '@/components/viral/ViralTop10Card';
 import ViralShortCard from '@/components/viral/ViralShortCard';
 import ViralStatsSection from '@/components/viral/ViralStatsSection';
 
+interface CastMember {
+  id: string;
+  profile_path: string;
+  name?: string;
+}
+
 interface Content {
   id: string;
   title: string;
@@ -24,6 +30,7 @@ interface Content {
   genre?: string;
   access_type?: 'free' | 'purchase' | 'membership';
   recent_episode?: string;
+  cast?: CastMember[];
 }
 
 interface Short {
@@ -35,6 +42,33 @@ interface Short {
   description: string | null;
   created_at: string;
 }
+
+const TMDB_API_KEY = '5cfa727c2f549c594772a50e10e3f272';
+
+// Fetch cast member profile images from TMDB
+const fetchCastWithImages = async (tmdbId: number, isMovie: boolean): Promise<CastMember[]> => {
+  try {
+    const mediaType = isMovie ? 'movie' : 'tv';
+    const response = await fetch(
+      `https://api.themoviedb.org/3/${mediaType}/${tmdbId}/credits?api_key=${TMDB_API_KEY}`
+    );
+    
+    if (!response.ok) return [];
+    
+    const data = await response.json();
+    const cast = data.cast || [];
+    
+    // Return top 5 cast members with images
+    return cast.slice(0, 5).map((member: any) => ({
+      id: member.id.toString(),
+      profile_path: member.profile_path,
+      name: member.name
+    }));
+  } catch (error) {
+    console.error('Error fetching cast images:', error);
+    return [];
+  }
+};
 
 const Viral = () => {
   const { t } = useLanguage();
@@ -59,7 +93,28 @@ const Viral = () => {
         .limit(20);
 
       if (contentError) throw contentError;
-      if (contentData) setTrendingContent(contentData);
+      
+      // Fetch cast images from TMDB for each content item
+      if (contentData) {
+        const contentWithCast = await Promise.all(
+          contentData.map(async (item) => {
+            let castMembers: CastMember[] = [];
+            
+            // If we have tmdb_id, fetch cast from TMDB API
+            if (item.tmdb_id) {
+              const isMovie = item.content_type === 'movie';
+              castMembers = await fetchCastWithImages(item.tmdb_id, isMovie);
+            }
+            
+            return {
+              ...item,
+              cast: castMembers
+            };
+          })
+        );
+        
+        setTrendingContent(contentWithCast);
+      }
 
       const { data: shortsData, error: shortsError } = await supabase
         .from('shorts')
@@ -128,7 +183,7 @@ const Viral = () => {
           <div 
             className="absolute inset-0 bg-cover bg-center bg-no-repeat scale-105"
             style={{ 
-              backgroundImage: `url(https://image.tmdb.org/t/p/original${heroBackdrop})`,
+              backgroundImage: `url(${heroBackdrop.startsWith('http') ? heroBackdrop : `https://image.tmdb.org/t/p/original${heroBackdrop}`})`,
               filter: 'blur(2px)',
             }}
           />
@@ -229,6 +284,7 @@ const Viral = () => {
                       overview: content.overview || undefined,
                       genre: content.genre || undefined,
                       tmdb_id: content.tmdb_id || undefined,
+                      cast: content.cast,
                       content_type: content.content_type,
                       access_type: content.access_type,
                       recent_episode: content.recent_episode || undefined

@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { Play, Star } from 'lucide-react';
-import { getBackdropUrl, getPosterUrl } from '@/lib/imageUtils';
+
+const TMDB_IMAGE_BASE = 'https://image.tmdb.org/t/p';
 
 interface Content {
   id: string;
@@ -22,6 +23,15 @@ interface ViralTop10CardProps {
   rank: number;
 }
 
+// Helper to get proper image URL without duplication
+const getImageUrl = (path: string | null, size: string = 'w780'): string | null => {
+  if (!path) return null;
+  // If it's already a full URL, return as-is
+  if (path.startsWith('http')) return path;
+  // Otherwise construct the TMDB URL
+  return `${TMDB_IMAGE_BASE}/${size}${path.startsWith('/') ? path : `/${path}`}`;
+};
+
 const ViralTop10Card = ({ content, rank }: ViralTop10CardProps) => {
   const navigate = useNavigate();
 
@@ -31,11 +41,8 @@ const ViralTop10Card = ({ content, rank }: ViralTop10CardProps) => {
     navigate(`/watch/${type}/${id}`);
   };
 
-  const backdropUrl = content.backdrop_path 
-    ? getBackdropUrl(content.backdrop_path, 'w780')
-    : content.poster_path 
-      ? getPosterUrl(content.poster_path, 'w500')
-      : null;
+  const backdropUrl = getImageUrl(content.backdrop_path, 'w780') 
+    || getImageUrl(content.poster_path, 'w500');
 
   return (
     <div
