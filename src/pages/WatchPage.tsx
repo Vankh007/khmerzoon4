@@ -853,7 +853,7 @@ const WatchPage = () => {
       <div className={`${useSingleColumnLayout ? 'flex flex-col' : 'flex h-screen overflow-hidden'}`}>
         {/* Left Column: Video + User Info + Cast - Full width on mobile/tablet, 55-65% on desktop */}
         <div 
-          className={`flex-1 min-w-0 flex flex-col ${useSingleColumnLayout ? '' : 'overflow-hidden'}`} 
+          className={`flex-1 min-w-0 flex flex-col ${useSingleColumnLayout ? '' : 'overflow-hidden pt-16'}`} 
           style={useSingleColumnLayout ? {} : { flex: '1 1 60%', maxWidth: '65%', minWidth: '55%' }}
         >
           {/* Video Player - Below status bar in portrait, full screen in landscape fullscreen */}
@@ -1034,7 +1034,7 @@ const WatchPage = () => {
 
         {/* Right Sidebar: 35-45% width, independently scrollable - Hidden on mobile/tablet/iPad portrait */}
         {!useSingleColumnLayout && (
-        <div className="overflow-y-auto border-l border-border/40 transition-all duration-300 ease-in-out" style={{ flex: '0 0 40%', maxWidth: '45%', minWidth: '35%' }}>
+        <div className="overflow-y-auto border-l border-border/40 transition-all duration-300 ease-in-out pt-16" style={{ flex: '0 0 40%', maxWidth: '45%', minWidth: '35%' }}>
           <div className="p-3 space-y-3">
             {/* Content Poster, Title - Only for Movies */}
             {!isSeriesContent && (
