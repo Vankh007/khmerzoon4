@@ -1034,7 +1034,7 @@ const WatchPage = () => {
 
         {/* Right Sidebar: 35-45% width, independently scrollable - Hidden on mobile/tablet/iPad portrait */}
         {!useSingleColumnLayout && (
-        <div className="overflow-y-auto border-l border-border/40 transition-all duration-300 ease-in-out pt-6" style={{ flex: '0 0 40%', maxWidth: '45%', minWidth: '35%' }}>
+        <div className="overflow-y-auto border-l border-border/40 transition-all duration-300 ease-in-out pt-1" style={{ flex: '0 0 40%', maxWidth: '45%', minWidth: '35%' }}>
           <div className="p-3 space-y-3">
             {/* Content Poster, Title - Only for Movies */}
             {!isSeriesContent && (
