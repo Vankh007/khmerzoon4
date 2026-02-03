@@ -32,8 +32,8 @@ const Home = () => {
         {isVisible('hero_banner') && <MobileHeroBanner page="home" />}
         {isVisible('circle_slider') && <MobileCircleSlider />}
         {isVisible('continuous_watch') && <HomeContinuousWatch />}
-        {isVisible('top_section') && <MobileTopSection />}
         {isVisible('pinned_series') && <PinnedSeriesSection />}
+        {isVisible('top_section') && <MobileTopSection />}
         {isVisible('series_update_today') && <SeriesUpdateTodaySection />}
         <AdSlot placement="banner" pageLocation="home_top_series" className="px-4 py-2" />
         {isVisible('top_celebrities') && <TopCelebritiesSection className="px-0" />}
@@ -51,8 +51,8 @@ const Home = () => {
     <div className="pb-8">
       {isVisible('hero_banner') && <HeroBanner page="home" />}
       <div className="space-y-6">
-        {isVisible('top_section') && <TopSection className="px-0 mx-[15px]" />}
         {isVisible('pinned_series') && <PinnedSeriesSection className="px-0 mx-[15px]" />}
+        {isVisible('top_section') && <TopSection className="px-0 mx-[15px]" />}
         {isVisible('series_update_today') && <SeriesUpdateTodaySection className="px-[15px]" />}
         <AdSlot placement="banner" pageLocation="home_top_series" className="px-4" />
         {isVisible('top_animes') && <TopAnimesSection className="mx-[15px] px-[15px]" />}
