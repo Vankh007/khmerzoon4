@@ -57,7 +57,6 @@ const PinnedSeriesSection = ({ className }: PinnedSeriesSectionProps) => {
                   <p className="text-white text-sm font-medium truncate">{series.title}</p>
                 </div>
               </div>
-              <p className="mt-2 text-sm font-medium truncate max-w-[140px] md:max-w-[160px]">{series.title}</p>
             </Link>
           ))}
         </div>
