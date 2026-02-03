@@ -1119,6 +1119,8 @@ export type Database = {
           display_order: number
           id: string
           is_visible: boolean
+          is_visible_mobile: boolean
+          is_visible_web: boolean
           section_key: string
           section_name: string
           updated_at: string
@@ -1128,6 +1130,8 @@ export type Database = {
           display_order?: number
           id?: string
           is_visible?: boolean
+          is_visible_mobile?: boolean
+          is_visible_web?: boolean
           section_key: string
           section_name: string
           updated_at?: string
@@ -1137,6 +1141,8 @@ export type Database = {
           display_order?: number
           id?: string
           is_visible?: boolean
+          is_visible_mobile?: boolean
+          is_visible_web?: boolean
           section_key?: string
           section_name?: string
           updated_at?: string

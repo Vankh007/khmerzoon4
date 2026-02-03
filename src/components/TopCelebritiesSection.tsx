@@ -114,7 +114,7 @@ export const TopCelebritiesSection = ({ className }: TopCelebritiesSectionProps)
   if (loading) {
     return (
       <section className={`relative py-4 md:py-8 ${className || ''}`}>
-        <div className="max-w-[1600px] mx-auto px-4 md:px-6">
+        <div className="px-4 md:px-[15px]">
           <h2 className="text-2xl font-bold text-foreground mb-6">Popular Celebrities</h2>
           <div className="flex gap-4 overflow-hidden">
             {[...Array(8)].map((_, i) => (
@@ -133,7 +133,7 @@ export const TopCelebritiesSection = ({ className }: TopCelebritiesSectionProps)
 
   return (
     <section className={`relative py-4 md:py-8 ${className || ''}`}>
-      <div className="max-w-[1600px] mx-auto px-4 md:px-6">
+      <div className="px-4 md:px-[15px]">
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-2xl font-bold text-foreground flex items-center gap-2">
             <Star className="w-6 h-6 text-primary fill-primary" />
