@@ -237,12 +237,12 @@ export function SeriesTable() {
                       onClick={() => pinnedMutation.mutate({ id: s.id, is_pinned: !s.is_pinned })}
                       className={`inline-flex items-center justify-center w-10 h-10 rounded transition-colors ${
                         s.is_pinned 
-                          ? 'bg-primary/20 text-primary hover:bg-primary/30' 
+                          ? 'bg-green-500/20 hover:bg-green-500/30' 
                           : 'hover:bg-muted/80'
                       }`}
                       disabled={pinnedMutation.isPending}
                     >
-                      📌
+                      <span className={s.is_pinned ? 'text-green-500' : ''}>📌</span>
                     </button>
                   </TableCell>
                   <TableCell>
