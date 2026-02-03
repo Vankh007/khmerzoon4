@@ -14,6 +14,7 @@ import { UpcomingSection } from '@/components/UpcomingSection';
 import AdSlot from '@/components/ads/AdSlot';
 import SeriesUpdateTodaySection from '@/components/SeriesUpdateTodaySection';
 import TopCelebritiesSection from '@/components/TopCelebritiesSection';
+import PinnedSeriesSection from '@/components/PinnedSeriesSection';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { useIsIPad } from '@/hooks/use-ipad';
 import { useHomeSections } from '@/hooks/useHomeSections';
@@ -32,6 +33,7 @@ const Home = () => {
         {isVisible('circle_slider') && <MobileCircleSlider />}
         {isVisible('continuous_watch') && <HomeContinuousWatch />}
         {isVisible('top_section') && <MobileTopSection />}
+        {isVisible('pinned_series') && <PinnedSeriesSection />}
         {isVisible('series_update_today') && <SeriesUpdateTodaySection />}
         <AdSlot placement="banner" pageLocation="home_top_series" className="px-4 py-2" />
         {isVisible('top_celebrities') && <TopCelebritiesSection className="px-0" />}
@@ -50,6 +52,7 @@ const Home = () => {
       {isVisible('hero_banner') && <HeroBanner page="home" />}
       <div className="space-y-6">
         {isVisible('top_section') && <TopSection className="px-0 mx-[15px]" />}
+        {isVisible('pinned_series') && <PinnedSeriesSection className="px-0 mx-[15px]" />}
         {isVisible('series_update_today') && <SeriesUpdateTodaySection className="px-[15px]" />}
         <AdSlot placement="banner" pageLocation="home_top_series" className="px-4" />
         {isVisible('top_animes') && <TopAnimesSection className="mx-[15px] px-[15px]" />}

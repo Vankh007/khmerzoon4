@@ -592,6 +592,7 @@ export type Database = {
           id: string
           intro_end: number | null
           intro_start: number | null
+          is_pinned: boolean | null
           last_content_update: string | null
           max_devices: number | null
           network_id: string | null
@@ -630,6 +631,7 @@ export type Database = {
           id?: string
           intro_end?: number | null
           intro_start?: number | null
+          is_pinned?: boolean | null
           last_content_update?: string | null
           max_devices?: number | null
           network_id?: string | null
@@ -668,6 +670,7 @@ export type Database = {
           id?: string
           intro_end?: number | null
           intro_start?: number | null
+          is_pinned?: boolean | null
           last_content_update?: string | null
           max_devices?: number | null
           network_id?: string | null
