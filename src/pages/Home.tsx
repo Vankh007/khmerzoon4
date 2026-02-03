@@ -21,7 +21,7 @@ import { useHomeSections } from '@/hooks/useHomeSections';
 const Home = () => {
   const isMobile = useIsMobile();
   const { isIPadPortrait, isIPadLandscape } = useIsIPad();
-  const { isVisible, loading } = useHomeSections();
+  const { isVisibleWeb, isVisibleMobile, loading } = useHomeSections();
 
   // Mobile layout: mobile devices OR iPad in portrait mode
   const useMobileLayout = isMobile || isIPadPortrait;
@@ -29,18 +29,18 @@ const Home = () => {
   if (useMobileLayout) {
     return (
       <div className="min-h-screen scrollbar-hide">
-        {isVisible('hero_banner') && <MobileHeroBanner page="home" />}
-        {isVisible('circle_slider') && <MobileCircleSlider />}
-        {isVisible('continuous_watch') && <HomeContinuousWatch />}
-        {isVisible('pinned_series') && <PinnedSeriesSection />}
-        {isVisible('top_section') && <MobileTopSection />}
-        {isVisible('series_update_today') && <SeriesUpdateTodaySection />}
+        {isVisibleMobile('hero_banner') && <MobileHeroBanner page="home" />}
+        {isVisibleMobile('circle_slider') && <MobileCircleSlider />}
+        {isVisibleMobile('continuous_watch') && <HomeContinuousWatch />}
+        {isVisibleMobile('pinned_series') && <PinnedSeriesSection />}
+        {isVisibleMobile('top_section') && <MobileTopSection />}
+        {isVisibleMobile('series_update_today') && <SeriesUpdateTodaySection />}
         <AdSlot placement="banner" pageLocation="home_top_series" className="px-4 py-2" />
-        {isVisible('top_celebrities') && <TopCelebritiesSection className="px-0" />}
-        {isVisible('trending') && <MobileContentSection title="Trending Now" type="trending" link="/movies" />}
-        {isVisible('new_releases') && <MobileContentSection title="New Releases" type="new_releases" link="/movies" />}
-        {isVisible('upcoming') && <UpcomingSection />}
-        {isVisible('collections') && <CollectionsScroll />}
+        {isVisibleMobile('top_celebrities') && <TopCelebritiesSection className="px-4" />}
+        {isVisibleMobile('trending') && <MobileContentSection title="Trending Now" type="trending" link="/movies" />}
+        {isVisibleMobile('new_releases') && <MobileContentSection title="New Releases" type="new_releases" link="/movies" />}
+        {isVisibleMobile('upcoming') && <UpcomingSection />}
+        {isVisibleMobile('collections') && <CollectionsScroll />}
         <AdSlot placement="banner" pageLocation="home_collections" className="px-4 py-2" />
       </div>
     );
@@ -49,22 +49,22 @@ const Home = () => {
   // Desktop Layout (also used for iPad landscape)
   return (
     <div className="pb-8">
-      {isVisible('hero_banner') && <HeroBanner page="home" />}
+      {isVisibleWeb('hero_banner') && <HeroBanner page="home" />}
       <div className="space-y-6">
-        {isVisible('pinned_series') && <PinnedSeriesSection className="px-0 mx-[15px]" />}
-        {isVisible('top_section') && <TopSection className="px-0 mx-[15px]" />}
-        {isVisible('series_update_today') && <SeriesUpdateTodaySection className="px-[15px]" />}
+        {isVisibleWeb('pinned_series') && <PinnedSeriesSection className="px-0 mx-[15px]" />}
+        {isVisibleWeb('top_section') && <TopSection className="px-0 mx-[15px]" />}
+        {isVisibleWeb('series_update_today') && <SeriesUpdateTodaySection className="px-[15px]" />}
         <AdSlot placement="banner" pageLocation="home_top_series" className="px-4" />
-        {isVisible('top_animes') && <TopAnimesSection className="mx-[15px] px-[15px]" />}
-        {isVisible('watch_history') && <HomeWatchHistory />}
-        {isVisible('continuous_watch') && <HomeContinuousWatch />}
-        {isVisible('top_movies') && <TopMoviesSection className="px-[15px] mx-[15px]" />}
-        {isVisible('top_celebrities') && <TopCelebritiesSection className="px-[15px] mx-[15px]" />}
-        {isVisible('upcoming') && <UpcomingSection className="mx-[15px] px-0" />}
-        {isVisible('collections') && <CollectionsScroll />}
+        {isVisibleWeb('top_animes') && <TopAnimesSection className="mx-[15px] px-[15px]" />}
+        {isVisibleWeb('watch_history') && <HomeWatchHistory />}
+        {isVisibleWeb('continuous_watch') && <HomeContinuousWatch />}
+        {isVisibleWeb('top_movies') && <TopMoviesSection className="px-[15px] mx-[15px]" />}
+        {isVisibleWeb('top_celebrities') && <TopCelebritiesSection className="mx-[15px]" />}
+        {isVisibleWeb('upcoming') && <UpcomingSection className="mx-[15px] px-0" />}
+        {isVisibleWeb('collections') && <CollectionsScroll />}
         <AdSlot placement="banner" pageLocation="home_collections" className="px-4" />
-        {isVisible('trending') && <ContentRow title="Trending Now" className="px-[15px] mx-[15px]" />}
-        {isVisible('new_releases') && <ContentRow title="New Releases" className="px-[15px] mx-[15px]" />}
+        {isVisibleWeb('trending') && <ContentRow title="Trending Now" className="px-[15px] mx-[15px]" />}
+        {isVisibleWeb('new_releases') && <ContentRow title="New Releases" className="px-[15px] mx-[15px]" />}
         <AdSlot placement="banner" pageLocation="home_new_releases" className="px-4" />
       </div>
     </div>
