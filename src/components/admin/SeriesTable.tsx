@@ -5,7 +5,7 @@ import { supabase } from '@/lib/supabase';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Checkbox } from '@/components/ui/checkbox';
-import { Search, Pencil, Trash2, Bell } from 'lucide-react';
+import { Search, Pencil, Trash2, Bell, Pin } from 'lucide-react';
 import { TableSkeleton } from './TableSkeleton';
 import { BulkActionsDropdown } from './BulkActionsDropdown';
 import { PushNotificationDialog } from './PushNotificationDialog';
@@ -235,14 +235,12 @@ export function SeriesTable() {
                   <TableCell>
                     <button
                       onClick={() => pinnedMutation.mutate({ id: s.id, is_pinned: !s.is_pinned })}
-                      className={`inline-flex items-center justify-center w-10 h-10 rounded transition-colors ${
-                        s.is_pinned 
-                          ? 'bg-green-500/20 hover:bg-green-500/30' 
-                          : 'hover:bg-muted/80'
-                      }`}
+                      className="inline-flex items-center justify-center w-10 h-10 rounded transition-colors hover:bg-muted/80"
                       disabled={pinnedMutation.isPending}
                     >
-                      <span className={s.is_pinned ? 'text-green-500' : ''}>📌</span>
+                      <Pin 
+                        className={`h-5 w-5 ${s.is_pinned ? 'text-green-500 fill-green-500' : 'text-muted-foreground'}`} 
+                      />
                     </button>
                   </TableCell>
                   <TableCell>
