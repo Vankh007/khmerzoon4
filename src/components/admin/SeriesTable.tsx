@@ -52,6 +52,20 @@ export function SeriesTable() {
     s.title?.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
+  const pinnedMutation = useMutation({
+    mutationFn: async ({ id, is_pinned }: { id: string; is_pinned: boolean }) => {
+      const { error } = await supabase.from('content').update({ is_pinned }).eq('id', id);
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['admin-series'] });
+      queryClient.invalidateQueries({ queryKey: ['pinned-series'] });
+    },
+    onError: (error: Error) => {
+      toast.error('Failed to update pinned status: ' + error.message);
+    },
+  });
+
   const deleteMutation = useMutation({
     mutationFn: async (ids: string[]) => {
       const { data: contentData } = await supabase
@@ -219,9 +233,17 @@ export function SeriesTable() {
                     </span>
                   </TableCell>
                   <TableCell>
-                    <span className="inline-flex items-center gap-1">
-                      📌 No
-                    </span>
+                    <button
+                      onClick={() => pinnedMutation.mutate({ id: s.id, is_pinned: !s.is_pinned })}
+                      className={`inline-flex items-center gap-1 px-2 py-1 rounded text-sm transition-colors ${
+                        s.is_pinned 
+                          ? 'bg-primary/20 text-primary hover:bg-primary/30' 
+                          : 'bg-muted hover:bg-muted/80'
+                      }`}
+                      disabled={pinnedMutation.isPending}
+                    >
+                      📌 {s.is_pinned ? 'Yes' : 'No'}
+                    </button>
                   </TableCell>
                   <TableCell>
                     <select 
